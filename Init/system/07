@@ -1,1 +1,1 @@
-cat /var/run/sshd.pid
+pgrep sshd

@@ -1,0 +1,43 @@
+RET="$(cat /etc/passwd | grep home | cut -f ":" -f 1)"
+echo "         OPTION MENU
+
+1: Add user
+2: Switch user
+3: Delete user
+4: Who is logged in ?"
+
+read input
+
+if [ ! $input == "1" ] && [ ! $input == "2" ] && [ ! $input == "3" ] && [ ! $input == "4" ]
+then
+	echo "Arguments must be 1, 2 or 3"
+	exit 1
+fi
+
+if [ $input == "1" ]
+then
+	echo "Write the name of the user to add :"
+	read input
+	sudo adduser $input
+	echo "$input add !"
+fi
+
+if [ $input == "2" ]
+then
+	echo "With which user do you want to switch ?"
+	read input
+	echo "U are now logged in as : $input"
+fi
+
+if [ $input == "3" ]
+then
+	echo "Write the name of the user to delete :"
+	read input
+	sudo userdel -fr $input
+	echo "$input deleted !"
+fi
+
+if [ $input == "4" ]
+then
+	echo "$RET"
+fi

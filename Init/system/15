@@ -1,1 +1,1 @@
-kill 618
+sudo pkill tail

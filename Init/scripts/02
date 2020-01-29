@@ -1,1 +1,23 @@
-userdel -r $1
+USER=$1
+RET="$(who | grep ${USER})"
+
+if [ -z "${RET}" ]
+then
+	echo "${USER} is not logged in"
+	exit 1
+fi
+
+echo "U will delete ${USER}. Are you sure ? [Y/n]"
+
+read input
+
+if [ $input == "Y" ] || [ $input == "y" ]
+then
+	sudo userdel -fr ${USER}
+	echo "${USER} deleted !"
+fi
+
+if [ $input == "N" ] || [ $input == "n" ]
+then
+	echo "${USER} not deleted"
+fi
